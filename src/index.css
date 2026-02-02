@@ -9,7 +9,8 @@
   name: "light";
   default: true;
   --color-primary: #caeb66;
-  --color-secondary: teal;
+  --color-secondary: #03373d;
+  --color-base-100: #03373d;
 }
 
 body {

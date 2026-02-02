@@ -5,10 +5,11 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className="space-y-5 py-10 rounded-2xl bg-black text-white flex flex-col items-center justify-center">
-      <div className="relative">
+    <div className="space-y-5 py-10 rounded-2xl bg-black text-white flex flex-col items-center ">
+      <div className="relative right-10">
         <Logo></Logo>
       </div>
+
       {/* text */}
       <p className="text-center w-[90%] md:w-[60%]">
         Enjoy fast, reliable parcel delivery with real-time tracking and zero
