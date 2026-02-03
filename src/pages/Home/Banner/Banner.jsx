@@ -8,7 +8,12 @@ import BannerBtn from "./BannerBtn";
 
 const Banner = () => {
   return (
-    <Carousel showArrows={false} showIndicators={false} infiniteLoop={true}>
+    <Carousel
+      showArrows={false}
+      autoPlay={true}
+      showIndicators={false}
+      infiniteLoop={true}
+    >
       <div className="relative">
         <img src={bannerOne} />
         <div className="absolute md:bottom-[15%] md:left-[6%] lg:bottom-[18%] lg:left-[6%] xl:bottom-[20%] xl:left-[7%]">

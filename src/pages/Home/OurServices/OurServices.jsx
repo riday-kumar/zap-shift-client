@@ -41,9 +41,9 @@ const OurServices = () => {
   ];
 
   return (
-    <section className="bg-secondary rounded-3xl p-8 lg:p-16 xl:p-20 space-y-12">
+    <section className="bg-secondary rounded-3xl py-14 lg:py-16 xl:py-20 space-y-12">
       {/* Intro Section */}
-      <header className="max-w-3xl mx-auto text-white text-center space-y-4">
+      <div className="max-w-3xl mx-auto text-white text-center space-y-4">
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
           Our Services
         </h2>
@@ -52,14 +52,14 @@ const OurServices = () => {
           hassle. From personal packages to business shipments — we deliver on
           time, every time.
         </p>
-      </header>
+      </div>
 
       {/* Services Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 mx-auto ">
         {allOurServices.map(({ id, heading, description }) => (
-          <article
+          <div
             key={id}
-            className="group bg-white rounded-3xl p-8 text-center space-y-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:bg-primary"
+            className="group bg-white text-white rounded-3xl p-8 text-center space-y-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:bg-primary hover:text-white"
           >
             <div className="inline-block rounded-full p-5 bg-[#eeedfc] transition-colors ">
               <img
@@ -70,13 +70,13 @@ const OurServices = () => {
               />
             </div>
 
-            <h3 className="text-xl font-bold text-base-100 leading-tight">
+            <h3 className="text-xl font-bold text-base-100 group-hover:text-white leading-tight">
               {heading}
             </h3>
-            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+            <p className="text-gray-600 group-hover:text-white text-sm md:text-base leading-relaxed">
               {description}
             </p>
-          </article>
+          </div>
         ))}
       </div>
     </section>
