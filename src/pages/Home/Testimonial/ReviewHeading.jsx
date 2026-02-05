@@ -4,7 +4,7 @@ const ReviewHeading = () => {
   return (
     <div className="text-center">
       <img className="mx-auto mb-12" src={customerTop} alt="" />
-      <h2 className="text-4xl font-bold text-base-100 mb-4">
+      <h2 className="text-4xl font-extrabold text-base-100 mb-4">
         What our customers are sayings
       </h2>
       <p className="text-[16px]">
