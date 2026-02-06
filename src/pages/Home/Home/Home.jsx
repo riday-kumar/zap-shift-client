@@ -6,6 +6,7 @@ import Brands from "../Brands/Brands";
 import Testimonial from "../Testimonial/Testimonial";
 import Features from "../Features/Features";
 import FirstPriority from "../FirstPriority/FirstPriority.";
+import Faq from "../FAQ/Faq";
 
 const reviews = fetch("reviews.json").then((res) => res.json());
 
@@ -19,6 +20,7 @@ const Home = () => {
       <Features></Features>
       <FirstPriority></FirstPriority>
       <Testimonial reviews={reviews}></Testimonial>
+      <Faq></Faq>
     </div>
   );
 };
