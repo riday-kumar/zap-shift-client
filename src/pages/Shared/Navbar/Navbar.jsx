@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../../../components/Logo/Logo";
+import { Link } from "react-router";
 
 const Navbar = () => {
   return (
@@ -62,10 +63,10 @@ const Navbar = () => {
             <a href="">Services</a>
           </li>
           <li>
-            <a href="">Coverage</a>
+            <Link to="/Coverage">Coverage</Link>
           </li>
           <li>
-            <a href="">AboutUs</a>
+            <Link to="/about">AboutUs</Link>
           </li>
           <li>
             <a href="">Pricing</a>
