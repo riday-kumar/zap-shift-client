@@ -33,10 +33,10 @@ const Navbar = () => {
                 <a href="">Services</a>
               </li>
               <li>
-                <a href="">Coverage</a>
+                <Link to="/Coverage">Coverage</Link>
               </li>
               <li>
-                <a href="">AboutUs</a>
+                <Link to="/about">AboutUs</Link>
               </li>
               <li>
                 <a href="">Pricing</a>
@@ -46,16 +46,21 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="flex flex-col gap-2">
-              <a className="btn bg-white text-gray-800 rounded-lg">Sign In</a>
+              <a
+                href="/login"
+                className="btn bg-white text-gray-800 rounded-lg"
+              >
+                Sign In
+              </a>
               <a className="btn btn-primary text-black rounded-lg">
                 Be a Rider
               </a>
             </div>
           </div>
         </div>
-        <a className="text-xl cursor-pointer">
+        <Link to="/" className="text-xl cursor-pointer">
           <Logo></Logo>
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal text-xl text-gray-500 px-1">
@@ -77,7 +82,9 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end md:flex gap-2 hidden">
-        <a className="btn bg-white text-gray-800 rounded-lg">Sign In</a>
+        <a href="/login" className="btn bg-white text-gray-800 rounded-lg">
+          Sign In
+        </a>
         <a className="btn btn-primary text-black rounded-lg">Be a Rider</a>
       </div>
     </div>
