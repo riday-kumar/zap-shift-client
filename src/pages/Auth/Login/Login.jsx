@@ -49,10 +49,28 @@ const Login = () => {
             placeholder="Password"
             {...register("password", {
               required: "Password is required",
+              pattern: {
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/,
+                message:
+                  "Password must be at least 6 characters and include uppercase, lowercase, number, and special character",
+              },
+              minLength: 6,
             })}
           />
           {errors.password?.type === "required" && (
             <p className="text-red-500 font-bold">Password is required</p>
+          )}
+          {errors.password?.type === "pattern" && (
+            <p className="text-red-500 font-bold">
+              Password must be at least 6 characters and include uppercase,
+              lowercase, number, and special character
+            </p>
+          )}
+          {errors.password?.type === "minLength" && (
+            <p className="text-red-500 font-bold">
+              Password should be minimum 6 character
+            </p>
           )}
           <div>
             <a className="link link-hover">Forgot password?</a>
@@ -60,6 +78,12 @@ const Login = () => {
           <button className="btn btn-success mt-4">Login</button>
         </fieldset>
       </form>
+      <p className="text-center">
+        Not Registered?{" "}
+        <a href="register" className="font-bold text-blue-600">
+          Create an account
+        </a>
+      </p>
     </div>
   );
 };
