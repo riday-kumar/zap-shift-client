@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../../../components/Logo/Logo";
 import { useForm } from "react-hook-form";
+import useAuth from "../../../hooks/useAuth";
 
 const Login = () => {
   const {
@@ -8,8 +9,18 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const { signInUser } = useAuth();
+
   const handleLogIn = (data) => {
     console.log(data);
+    signInUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="w-[90%] lg:w-[70%] relative">
@@ -31,11 +42,7 @@ const Login = () => {
             className="input w-full bg-white"
             placeholder="Email"
             {...register("email", {
-              required: "Email is Required",
-              pattern: {
-                value: /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/,
-                message: "Invalid Email Address",
-              },
+              required: true,
             })}
           />
           {errors.email?.type === "required" && (
@@ -48,7 +55,7 @@ const Login = () => {
             className="input w-full bg-white"
             placeholder="Password"
             {...register("password", {
-              required: "Password is required",
+              required: true,
               pattern: {
                 value:
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/,
@@ -75,7 +82,9 @@ const Login = () => {
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
-          <button className="btn btn-success mt-4">Login</button>
+          <button type="submit" className="btn btn-success mt-4">
+            Login
+          </button>
         </fieldset>
       </form>
       <p className="text-center">

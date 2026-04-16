@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../../../components/Logo/Logo";
 import { useForm } from "react-hook-form";
+import useAuth from "../../../hooks/useAuth";
 
 const Register = () => {
   const {
@@ -8,8 +9,18 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const { registerUser } = useAuth();
+
   const handleRegistration = (data) => {
     console.log(data);
+    registerUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="w-[90%] lg:w-[70%] relative">
@@ -31,16 +42,13 @@ const Register = () => {
             className="input w-full bg-white"
             placeholder="Email"
             {...register("email", {
-              required: "Email is Required",
-              pattern: {
-                value: /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/,
-                message: "Invalid Email Address",
-              },
+              required: true,
             })}
           />
           {errors.email?.type === "required" && (
             <p className="text-red-500 font-bold">Email is Required</p>
           )}
+
           <label className="label">Password</label>
           <input
             type="password"
@@ -75,7 +83,9 @@ const Register = () => {
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
-          <button className="btn btn-success mt-4 font-bold">Sign Up</button>
+          <button type="submit" className="btn btn-success mt-4 font-bold">
+            Sign Up
+          </button>
         </fieldset>
       </form>
     </div>
