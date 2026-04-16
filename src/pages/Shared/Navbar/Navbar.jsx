@@ -1,8 +1,19 @@
 import React from "react";
 import Logo from "../../../components/Logo/Logo";
 import { Link } from "react-router";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        console.log("successfully Log Out");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="rounded-2xl navbar bg-white shadow-sm">
       <div className="navbar-start">
@@ -46,12 +57,17 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="flex flex-col gap-2">
-              <a
-                href="/login"
-                className="btn bg-white text-gray-800 rounded-lg"
-              >
-                Sign In
-              </a>
+              {user ? (
+                <a className="btn bg-white text-gray-800 rounded-lg">Log Out</a>
+              ) : (
+                <a
+                  href="/login"
+                  className="btn bg-white text-gray-800 rounded-lg"
+                >
+                  Sign In
+                </a>
+              )}
+
               <a className="btn btn-primary text-black rounded-lg">
                 Be a Rider
               </a>
@@ -82,9 +98,18 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end md:flex gap-2 hidden">
-        <a href="/login" className="btn bg-white text-gray-800 rounded-lg">
-          Sign In
-        </a>
+        {user ? (
+          <button
+            onClick={handleLogOut}
+            className="btn bg-white text-gray-800 rounded-lg"
+          >
+            Log Out
+          </button>
+        ) : (
+          <a href="/login" className="btn bg-white text-gray-800 rounded-lg">
+            Sign In
+          </a>
+        )}
         <a className="btn btn-primary text-black rounded-lg">Be a Rider</a>
       </div>
     </div>

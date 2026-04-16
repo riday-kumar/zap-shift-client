@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../../../components/Logo/Logo";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const {
@@ -23,15 +24,12 @@ const Login = () => {
       });
   };
   return (
-    <div className="w-[90%] lg:w-[70%] relative">
-      <div className="absolute -top-16 lg:-top-[70%] lg:-left-12">
+    <div className="w-[90%] lg:w-[70%]">
+      <div className="flex justify-center pb-5">
         <Logo></Logo>
       </div>
-      <div className="text-center max-md:mt-16">
-        <h2 className="uppercase font-extrabold text-2xl text-center">
-          Welcome Back
-        </h2>
-        <p>Login With ZapShift</p>
+      <div className="text-center">
+        <p className="font-bold">Login With ZapShift</p>
       </div>
       <form onSubmit={handleSubmit(handleLogIn)}>
         <fieldset className="fieldset w-full">
@@ -87,12 +85,13 @@ const Login = () => {
           </button>
         </fieldset>
       </form>
-      <p className="text-center">
+      <p className="text-center mt-5">
         Not Registered?{" "}
         <a href="register" className="font-bold text-blue-600">
           Create an account
         </a>
       </p>
+      <SocialLogin></SocialLogin>
     </div>
   );
 };

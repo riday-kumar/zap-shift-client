@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../../../components/Logo/Logo";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
   const {
@@ -23,14 +24,11 @@ const Register = () => {
       });
   };
   return (
-    <div className="w-[90%] lg:w-[70%] relative">
-      <div className="absolute -top-16 lg:-top-[70%] lg:-left-12">
+    <div className="w-[90%] lg:w-[70%]">
+      <div className="flex justify-center pb-5">
         <Logo></Logo>
       </div>
-      <div className="text-center max-md:mt-16">
-        <h2 className="uppercase font-extrabold text-2xl text-center">
-          Welcome To ZapShift
-        </h2>
+      <div className="text-center font-bold">
         <p>Signup With ZapShift</p>
       </div>
       <form onSubmit={handleSubmit(handleRegistration)}>
@@ -88,6 +86,7 @@ const Register = () => {
           </button>
         </fieldset>
       </form>
+      <SocialLogin></SocialLogin>
     </div>
   );
 };
