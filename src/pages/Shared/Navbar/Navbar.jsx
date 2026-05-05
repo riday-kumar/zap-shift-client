@@ -41,7 +41,7 @@ const Navbar = () => {
           >
             <ul>
               <li>
-                <a href="">Services</a>
+                <Link to="">Services</Link>
               </li>
               <li>
                 <Link to="/Coverage">Coverage</Link>
@@ -50,38 +50,46 @@ const Navbar = () => {
                 <Link to="/about">AboutUs</Link>
               </li>
               <li>
-                <a href="">Pricing</a>
+                <Link to="">Pricing</Link>
               </li>
               <li>
-                <a href="">Be a Rider</a>
+                <Link to="/rider">Be a Rider</Link>
+              </li>
+              <li>
+                <Link to="send-parcel">Send Parcel</Link>
               </li>
             </ul>
             <div className="flex flex-col gap-2">
               {user ? (
-                <a className="btn bg-white text-gray-800 rounded-lg">Log Out</a>
+                <button className="btn bg-white text-gray-800 rounded-lg">
+                  Log Out
+                </button>
               ) : (
-                <a
-                  href="/login"
+                <Link
+                  to="/login"
                   className="btn bg-white text-gray-800 rounded-lg"
                 >
                   Sign In
-                </a>
+                </Link>
               )}
 
-              <a className="btn btn-primary text-black rounded-lg">
+              <Link
+                to="/rider"
+                className="btn btn-primary text-black rounded-lg"
+              >
                 Be a Rider
-              </a>
+              </Link>
             </div>
           </div>
         </div>
-        <Link to="/" className="text-xl cursor-pointer">
+        <div className="text-xl cursor-pointer">
           <Logo></Logo>
-        </Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal text-xl text-gray-500 px-1">
           <li>
-            <a href="">Services</a>
+            <Link>Services</Link>
           </li>
           <li>
             <Link to="/Coverage">Coverage</Link>
@@ -90,27 +98,39 @@ const Navbar = () => {
             <Link to="/about">AboutUs</Link>
           </li>
           <li>
-            <a href="">Pricing</a>
+            <Link>Pricing</Link>
           </li>
           <li>
-            <a href="">Be a Rider</a>
+            <Link to="/rider">Be a Rider</Link>
+          </li>
+          <li>
+            <Link to="/send-parcel">Send Parcel</Link>
           </li>
         </ul>
       </div>
       <div className="navbar-end md:flex gap-2 hidden">
         {user ? (
-          <button
-            onClick={handleLogOut}
-            className="btn bg-white text-gray-800 rounded-lg"
-          >
-            Log Out
-          </button>
+          <>
+            <img
+              className="border-2 border-blue-600 rounded-full w-12 h-12"
+              src={user?.photoURL}
+              alt=""
+            />
+            <button
+              onClick={handleLogOut}
+              className="btn bg-white text-gray-800 rounded-lg"
+            >
+              Log Out
+            </button>
+          </>
         ) : (
-          <a href="/login" className="btn bg-white text-gray-800 rounded-lg">
+          <Link to="/login" className="btn bg-white text-gray-800 rounded-lg">
             Sign In
-          </a>
+          </Link>
         )}
-        <a className="btn btn-primary text-black rounded-lg">Be a Rider</a>
+        <Link to="/rider" className="btn btn-primary text-black rounded-lg">
+          Be a Rider
+        </Link>
       </div>
     </div>
   );

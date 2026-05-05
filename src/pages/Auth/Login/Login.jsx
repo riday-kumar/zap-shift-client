@@ -3,6 +3,7 @@ import Logo from "../../../components/Logo/Logo";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import { useLocation, useNavigate } from "react-router";
 
 const Login = () => {
   const {
@@ -13,11 +14,17 @@ const Login = () => {
 
   const { signInUser } = useAuth();
 
+  const location = useLocation();
+  console.log(location);
+
+  const navigate = useNavigate();
+
   const handleLogIn = (data) => {
     console.log(data);
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        navigate(location.state || "/");
       })
       .catch((error) => {
         console.log(error);

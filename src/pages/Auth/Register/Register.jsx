@@ -3,6 +3,7 @@ import Logo from "../../../components/Logo/Logo";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import axios from "axios";
 
 const Register = () => {
   const {
@@ -11,13 +12,35 @@ const Register = () => {
     handleSubmit,
   } = useForm();
 
-  const { registerUser } = useAuth();
+  const { registerUser, updateUserProfile } = useAuth();
 
   const handleRegistration = (data) => {
     console.log(data);
+    // console.log(data.photo[0]);
+    const profileImg = data.photo[0];
+    console.log(profileImg);
+
     registerUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
+        const formData = new FormData();
+        formData.append("image", profileImg);
+        const imag_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_KEY}`;
+
+        axios.post(imag_API_URL, formData).then((res) => {
+          console.log("after image upload", res.data.data.url);
+
+          // update user profile
+          const userProfile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+
+          updateUserProfile(userProfile)
+            .then(() => {
+              console.log("user profile updated done");
+            })
+            .catch((error) => console.log(error));
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -33,10 +56,26 @@ const Register = () => {
       </div>
       <form onSubmit={handleSubmit(handleRegistration)}>
         <fieldset className="fieldset w-full">
-          <label className="label">Email</label>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            className="input w-full bg-white"
+            name="name"
+            id="name"
+            {...register("name", {
+              required: true,
+            })}
+          />
+          {errors.name?.type === "required" && (
+            <p className="text-red-500 font-bold">Name is Required</p>
+          )}
+          <label htmlFor="email" className="label">
+            Email
+          </label>
           <input
             type="email"
             name="email"
+            id="email"
             className="input w-full bg-white"
             placeholder="Email"
             {...register("email", {
@@ -47,12 +86,30 @@ const Register = () => {
             <p className="text-red-500 font-bold">Email is Required</p>
           )}
 
-          <label className="label">Password</label>
+          {/* image input field */}
+          <label htmlFor="photo" className="label">
+            Photo
+          </label>
+          <input
+            style={{ color: "white" }}
+            className="text-white"
+            type="file"
+            name="photo"
+            id="photo"
+            {...register("photo", { required: true })}
+            placeholder="Your photo"
+            className="file-input"
+          />
+
+          <label htmlFor="password" className="label">
+            Password
+          </label>
           <input
             type="password"
             name="password"
             className="input w-full bg-white"
             placeholder="Password"
+            id="password"
             {...register("password", {
               required: "Password is required",
               pattern: {
