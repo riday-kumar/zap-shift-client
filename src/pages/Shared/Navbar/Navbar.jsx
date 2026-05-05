@@ -14,6 +14,35 @@ const Navbar = () => {
         console.log(err);
       });
   };
+  const links = (
+    <>
+      <li>
+        <Link>Services</Link>
+      </li>
+      <li>
+        <Link to="/Coverage">Coverage</Link>
+      </li>
+      <li>
+        <Link to="/about">AboutUs</Link>
+      </li>
+      <li>
+        <Link>Pricing</Link>
+      </li>
+      <li>
+        <Link to="/rider">Be a Rider</Link>
+      </li>
+      <li>
+        <Link to="/send-parcel">Send Parcel</Link>
+      </li>
+      {user && (
+        <>
+          <li>
+            <Link to="/dashboard/my-parcels">Dashboard</Link>
+          </li>
+        </>
+      )}
+    </>
+  );
   return (
     <div className="rounded-2xl navbar bg-white shadow-sm">
       <div className="navbar-start">
@@ -39,26 +68,7 @@ const Navbar = () => {
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <ul>
-              <li>
-                <Link to="">Services</Link>
-              </li>
-              <li>
-                <Link to="/Coverage">Coverage</Link>
-              </li>
-              <li>
-                <Link to="/about">AboutUs</Link>
-              </li>
-              <li>
-                <Link to="">Pricing</Link>
-              </li>
-              <li>
-                <Link to="/rider">Be a Rider</Link>
-              </li>
-              <li>
-                <Link to="send-parcel">Send Parcel</Link>
-              </li>
-            </ul>
+            <ul>{links}</ul>
             <div className="flex flex-col gap-2">
               {user ? (
                 <button className="btn bg-white text-gray-800 rounded-lg">
@@ -88,24 +98,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal text-xl text-gray-500 px-1">
-          <li>
-            <Link>Services</Link>
-          </li>
-          <li>
-            <Link to="/Coverage">Coverage</Link>
-          </li>
-          <li>
-            <Link to="/about">AboutUs</Link>
-          </li>
-          <li>
-            <Link>Pricing</Link>
-          </li>
-          <li>
-            <Link to="/rider">Be a Rider</Link>
-          </li>
-          <li>
-            <Link to="/send-parcel">Send Parcel</Link>
-          </li>
+          {links}
         </ul>
       </div>
       <div className="navbar-end md:flex gap-2 hidden">

@@ -1,14 +1,17 @@
 import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 const SendParcel = () => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, control, reset } = useForm();
+
+  const axiosSecure = useAxiosSecure();
+  console.log(axiosSecure);
+
+  const { user } = useAuth();
 
   const serviceCenters = useLoaderData();
   const regionDuplicate = serviceCenters.map((c) => c.region);
@@ -31,10 +34,57 @@ const SendParcel = () => {
   });
 
   const handleSendParcel = (data) => {
-    console.log(data);
-    const sameDistrict =
-      data["sender - district"] === data["receiver - district"];
-    console.log(sameDistrict);
+    const isDocument = data["parcel-type"] === "document";
+    const isSameDistrict =
+      data["sender-district"] === data["receiver-district"];
+    console.log(isSameDistrict);
+    const isWeight = data["parcel-weight"];
+
+    let cost = 0;
+    if (isDocument) {
+      cost = isSameDistrict ? 60 : 80;
+    }
+
+    if (!isDocument && isWeight <= 3) {
+      cost = isSameDistrict ? 110 : 150;
+    }
+
+    if (!isDocument && isWeight > 3) {
+      const minCharge = isSameDistrict ? 110 : 150;
+      const extraWeight = isWeight - 3;
+      const extraCharge = isSameDistrict
+        ? extraWeight * 40
+        : extraWeight * 40 + 40;
+
+      cost = minCharge + extraCharge;
+    }
+
+    console.log(cost);
+
+    Swal.fire({
+      title: "Agree With the Cost?",
+      text: `You will be charged! ${cost} Taka`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Send the Parcel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // save the parcel info to the database
+        axiosSecure.post("/parcels", data).then((res) => {
+          console.log("after saving parcel", res.data);
+
+          reset();
+        });
+
+        Swal.fire({
+          title: "Success!",
+          text: "Your parcel will be sent properly",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
@@ -108,6 +158,7 @@ const SendParcel = () => {
             <label htmlFor="sender-name">Sender Name</label>
             <input
               {...register("sender-name")}
+              defaultValue={user?.displayName}
               className="input w-full"
               type="text"
               name="sender-name"
@@ -118,6 +169,7 @@ const SendParcel = () => {
             <label htmlFor="sender-email">Sender Email</label>
             <input
               {...register("sender-email")}
+              defaultValue={user?.email}
               className="input w-full"
               type="text"
               name="sender-email"
