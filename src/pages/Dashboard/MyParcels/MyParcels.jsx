@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { MdDelete } from "react-icons/md";
 import { FaEdit, FaEye } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyParcels = () => {
   const { user } = useAuth();
@@ -71,6 +72,7 @@ const MyParcels = () => {
               <th>Receiver Regin</th>
               <th>Receiver District</th> */}
               <th>Cost</th>
+              <th>Payment</th>
               {/* <th>Delivery Instruction</th>
               <th>Parcel Send</th> */}
             </tr>
@@ -108,6 +110,18 @@ const MyParcels = () => {
                 <td>{parcel["receiver-region"]}</td>
                 <td>{parcel["receiver-district"]}</td> */}
                 <td>{parcel["cost"]}</td>
+                <td>
+                  {parcel.paymentStatus === "paid" ? (
+                    <span className="text font-bold text-green-500">Paid</span>
+                  ) : (
+                    <Link
+                      to={`/dashboard/payment/${parcel._id}`}
+                      className="btn btn-sm btn-primary text-black font-bold"
+                    >
+                      Pay
+                    </Link>
+                  )}
+                </td>
                 {/* <td>{parcel["delivery-instruction"]}</td> */}
                 <td>{parcel["createdAt"]}</td>
               </tr>
