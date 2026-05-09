@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGift } from "react-icons/fa";
+import { FaGift, FaHistory } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router";
 
 const DashboardLayout = () => {
@@ -104,6 +104,17 @@ const DashboardLayout = () => {
               >
                 <FaGift className="my-1.5 inline-block size-4" />
                 <span className="is-drawer-close:hidden">My Parcels</span>
+              </NavLink>
+            </li>
+            {/* Payment History */}
+            <li>
+              <NavLink
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Payment History"
+                to="/dashboard/payment-history"
+              >
+                <FaHistory className="my-1.5 inline-block size-4" />
+                <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
           </ul>
