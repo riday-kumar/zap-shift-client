@@ -1,5 +1,6 @@
 import React from "react";
 import { FaGift, FaHistory } from "react-icons/fa";
+import { MdOutlineDirectionsBike } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 
 const DashboardLayout = () => {
@@ -115,6 +116,17 @@ const DashboardLayout = () => {
               >
                 <FaHistory className="my-1.5 inline-block size-4" />
                 <span className="is-drawer-close:hidden">Payment History</span>
+              </NavLink>
+            </li>
+            {/* Riders */}
+            <li>
+              <NavLink
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Approve Riders"
+                to="/dashboard/approve-riders"
+              >
+                <MdOutlineDirectionsBike className="my-1.5 inline-block size-4" />
+                <span className="is-drawer-close:hidden">Approve Riders</span>
               </NavLink>
             </li>
           </ul>
