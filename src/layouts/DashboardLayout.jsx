@@ -1,6 +1,6 @@
 import React from "react";
-import { FaGift, FaHistory, FaUserFriends } from "react-icons/fa";
-import { MdOutlineDirectionsBike } from "react-icons/md";
+import { FaGift, FaHistory, FaTasks, FaUserFriends } from "react-icons/fa";
+import { MdAssignmentAdd, MdOutlineDirectionsBike } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
 
@@ -121,6 +121,26 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
+            {/* rider links only */}
+            {role === "rider" && (
+              <>
+                {/*  */}
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assigned Deliveries"
+                    to="/dashboard/assigned-deliveries"
+                  >
+                    <FaTasks className="my-1.5 inline-block size-4" />
+                    <span className="is-drawer-close:hidden">
+                      Assigned Deliveries
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* admin links only */}
             {role === "admin" && (
               <>
                 {/* approve riders */}
@@ -147,6 +167,17 @@ const DashboardLayout = () => {
                     <span className="is-drawer-close:hidden">
                       Users Management
                     </span>
+                  </NavLink>
+                </li>
+                {/* Assign Riders*/}
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Rider"
+                    to="/dashboard/assign-riders"
+                  >
+                    <MdAssignmentAdd className="my-1.5 inline-block size-4" />
+                    <span className="is-drawer-close:hidden">Assign Rider</span>
                   </NavLink>
                 </li>
               </>

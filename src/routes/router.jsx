@@ -19,6 +19,7 @@ import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import ApproveRiders from "../pages/Dashboard/ApproveRiders/ApproveRiders";
 import UsersManagement from "../pages/Dashboard/UsersManagement/UsersManagement";
 import AdminRoute from "./AdminRoute";
+import AssignRider from "../pages/Dashboard/AssignRiders/AssignRider";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "rider",
-        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+        loader: () => fetch("./serviceCenter.json").then((res) => res.json()),
         element: (
           <PrivateRoute>
             <Rider></Rider>
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "send-parcel",
-        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+        loader: () => fetch("./serviceCenter.json").then((res) => res.json()),
         element: (
           <PrivateRoute>
             <SendParcel></SendParcel>
@@ -51,7 +52,7 @@ export const router = createBrowserRouter([
       {
         path: "coverage",
         Component: Coverage,
-        loader: () => fetch("serviceCenter.json").then((res) => res.json()),
+        loader: () => fetch("./serviceCenter.json").then((res) => res.json()),
       },
       {
         path: "about",
@@ -122,6 +123,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <UsersManagement></UsersManagement>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "assign-riders",
+        element: (
+          <AdminRoute>
+            <AssignRider></AssignRider>
           </AdminRoute>
         ),
       },

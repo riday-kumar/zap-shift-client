@@ -52,7 +52,8 @@ const ApproveRiders = () => {
               <th>Name</th>
               <th>Status</th>
               <th>Phone</th>
-              <th>Actions</th>
+              <th>Action</th>
+              <th>Work Status</th>
             </tr>
           </thead>
           <tbody>
@@ -60,7 +61,18 @@ const ApproveRiders = () => {
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{rider["rider-name"]}</td>
-                <td>{rider["status"]}</td>
+                <td
+                  className={`font-bold
+                    ${
+                      rider["status"] === "accept"
+                        ? "text-green-500"
+                        : rider["status"] === "reject"
+                          ? "text-red-600"
+                          : "text-blue-600"
+                    }`}
+                >
+                  {rider["status"]}
+                </td>
                 <td>{rider["rider-phone"]}</td>
                 <td>
                   {rider.status === "pending" ? (
@@ -86,6 +98,7 @@ const ApproveRiders = () => {
                     <p>{rider.status}</p>
                   )}
                 </td>
+                <td>{rider?.workStatus}</td>
               </tr>
             ))}
           </tbody>

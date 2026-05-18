@@ -73,8 +73,8 @@ const MyParcels = () => {
               <th>Receiver District</th> */}
               <th>Cost</th>
               <th>Payment</th>
-              {/* <th>Delivery Instruction</th>
-              <th>Parcel Send</th> */}
+              <th>Delivery Status</th>
+              {/* <th>Parcel Send</th> */}
             </tr>
           </thead>
           <tbody>
@@ -122,8 +122,8 @@ const MyParcels = () => {
                     </Link>
                   )}
                 </td>
-                {/* <td>{parcel["delivery-instruction"]}</td> */}
-                <td>{parcel["createdAt"]}</td>
+                <td>{parcel.deliveryStatus}</td>
+                {/* <td>{parcel["createdAt"]}</td> */}
               </tr>
             ))}
           </tbody>
